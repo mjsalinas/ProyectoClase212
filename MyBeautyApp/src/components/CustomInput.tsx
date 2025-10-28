@@ -1,4 +1,4 @@
-import { Button,Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
+import { Button,StyleSheet,Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
 import {MaterialIcons, Ionicons} from "@expo/vector-icons";
 import { useState } from "react";
 
@@ -11,16 +11,15 @@ type Props = {
     onChange: (text: string) => void;
 }
 
-export default function CustomInput ({type = "text", required, value, placeholder, onChange}: Props){
+export default function CustomInput ({type = "email", required, value, placeholder, onChange}: Props){
     const [isSecureText, setIsSecureText] = useState(type === "password");
 
     const icon = type === 'email' ? 'email' : 
-                    type === 'password' ? 'lock-closed-outline' : 'text-fields'
+                    type === 'password' ? 'lock-closed-outline' : ''
     return(
         // wrapper
-        <View >
             //inputContainer
-            <View>
+            <View style={styles.inputContainer}>
                 <MaterialIcons name={icon as any } size={20} color="#000000" />
                 <TextInput 
                  placeholder={placeholder}
@@ -28,6 +27,7 @@ export default function CustomInput ({type = "text", required, value, placeholde
                  onChangeText={onChange}
                  onBlur={()=>{}}
                  secureTextEntry={isSecureText}
+                 style={styles.input}
                  />
                 
                 <TouchableOpacity 
@@ -37,11 +37,32 @@ export default function CustomInput ({type = "text", required, value, placeholde
                         }
                     }
                 > 
-                    <Text>Icon Button</Text>
                     <Ionicons name={isSecureText ? 'eye' : 'eye-off'} size={22} />
                 </TouchableOpacity>
             </View>
-        </View>
     );
 }
 
+const styles = StyleSheet.create({
+    wrapper: {
+        padding: 15,
+    },
+    inputContainer: {
+        //distribucion de componentes
+        flexDirection: 'row',
+        alignItems: 'center',
+        
+        //estilizacion de input
+        borderWidth: 1,
+        borderColor:'#ccc',
+        borderRadius: 8, 
+        paddingHorizontal: 13,
+        backgroundColor: '#f9f9f9',
+        width:'80%'
+    },
+    input:{
+        //agregando espacio al componente input nativo
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+    }
+})
