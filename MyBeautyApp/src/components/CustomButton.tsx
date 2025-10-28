@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 type Props = {
     title: string;
@@ -22,10 +22,14 @@ const getStyles = (variant: 'primary' | 'secondary' | 'tertiary') =>
                 borderColor: "#000",
                 borderRadius: 6,
                 padding: 12, 
-                backgroundColor: variant === "primary" ? 'pink' : 'red'
+                backgroundColor: variant === "primary" ? '#523954' : 
+                                    variant === "secondary" ? '#E3DBDB' :
+                                        "#fff"
             }, 
             buttonTitle:{
-                color: 'white',
+                color: variant === 'primary'?'#ccc' : 
+                        variant === 'secondary'? '#000' :
+                        '#656c78',
                 fontWeight: 'bold'
             }
         }
