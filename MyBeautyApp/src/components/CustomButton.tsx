@@ -22,7 +22,8 @@ const getStyles = (variant: 'primary' | 'secondary' | 'tertiary') =>
                 borderColor: "#000",
                 borderRadius: 6,
                 padding: 12, 
-                backgroundColor: variant === "primary" ? '#523954' : 
+                marginBottom: 10,
+                backgroundColor: variant === "primary" ? '#2d0f2fff' : 
                                     variant === "secondary" ? '#E3DBDB' :
                                         "#fff"
             }, 
