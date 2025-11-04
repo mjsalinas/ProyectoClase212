@@ -8,7 +8,7 @@ export default function LoginScreen({navigation} : any) {
 
   const handleLogin = () => {
     try {
-        navigation.navigate('Home', {email});
+        navigation.navigate('Tabs');
     } catch (error) {
         console.log(error);
     }
