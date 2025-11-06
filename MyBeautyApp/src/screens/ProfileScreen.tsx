@@ -13,7 +13,6 @@ const handleLogout = () =>{
             routes: [{name: 'Login'}],
         })
     }
-
 }
     return(
     <View>
@@ -22,7 +21,7 @@ const handleLogout = () =>{
         <CustomButton title="Cerrar Sesion"
         onPress={handleLogout}/>
 
-        //intento fallido de redefinicion de stack de navegacion 
+        {/* //intento fallido de redefinicion de stack de navegacion  */}
      <CustomButton title="Ir a login"
         onPress={()=>{
             navigation.navigate('Login');

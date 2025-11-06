@@ -10,7 +10,7 @@ type Props = {
     onChange: (text: string) => void;
 }
 
-export default function CustomInput ({type = "email", required, value, placeholder, onChange}: Props){
+export default function CustomInput ({type = "text", required, value, placeholder, onChange}: Props){
     const [isSecureText, setIsSecureText] = useState(type === "password");
     const isPasswordField = type === 'password';
    
