@@ -1,18 +1,25 @@
 import { useState } from "react";
-import { View, Text,StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 
-export default function LoginScreen({navigation} : any) {
+export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
 
   const handleLogin = () => {
     try {
-        navigation.navigate('Tabs');
+      navigation.navigate('Tabs');
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
+
+  const handleGoToRegister = () => {
+    navigation.navigate('ServiceRegistry');
+  };
+
+
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -27,16 +34,14 @@ export default function LoginScreen({navigation} : any) {
           value={'123456'}
           type='password'
           placeholder={'Correo'}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
-        <CustomButton title={'Iniciar Sesion'} 
-        onPress={handleLogin}>
+        <CustomButton title={'Iniciar Sesion'}
+          onPress={handleLogin}>
 
-            
+
         </CustomButton>
-        <CustomButton title={'Registrarme'} variant='secondary' onPress={function (): void {
-          throw new Error('Function not implemented.');
-        }}>
+        <CustomButton title={'Registrarme'} variant='secondary' onPress={handleGoToRegister}>
         </CustomButton>
       </View>
     </View>
@@ -54,7 +59,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   card: {
-   backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
     borderRadius: 15,
     padding: 30,
     width: '85%',
