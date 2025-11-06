@@ -13,6 +13,15 @@ export default function LoginScreen({navigation} : any) {
         console.log(error);
     }
   }
+
+   const handleRegister = () => {
+    try {
+        navigation.navigate('Register');
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -34,10 +43,7 @@ export default function LoginScreen({navigation} : any) {
 
             
         </CustomButton>
-        <CustomButton title={'Registrarme'} variant='secondary' onPress={function (): void {
-          throw new Error('Function not implemented.');
-        }}>
-        </CustomButton>
+        <CustomButton title={'Registrarme'} variant='secondary' onPress={handleRegister} />
       </View>
     </View>
   );
