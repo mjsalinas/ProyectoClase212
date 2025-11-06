@@ -1,43 +1,47 @@
 import { useState } from "react";
-import { View, Text,StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 
-export default function LoginScreen({navigation} : any) {
-  const [email, setEmail] = useState('');
+export default function LoginScreen({ navigation }: any) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    try {
-        navigation.navigate('Tabs');
-    } catch (error) {
-        console.log(error);
+    if (!email || !password) {
+      Alert.alert("Error", "Por favor, llena todos los campos.");
+      return;
     }
-  }
+
+    navigation.navigate("Tabs", { email });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}> Sign In</Text>
+        <Text style={styles.title}>Sign In</Text>
+
         <CustomInput
           value={email}
-          type='email'
-          placeholder={'Correo'}
+          type="email"
+          placeholder="Correo electrónico"
           onChange={setEmail}
         />
-        <CustomInput
-          value={'123456'}
-          type='password'
-          placeholder={'Correo'}
-          onChange={()=>{}}
-        />
-        <CustomButton title={'Iniciar Sesion'} 
-        onPress={handleLogin}>
 
-            
-        </CustomButton>
-        <CustomButton title={'Registrarme'} variant='secondary' onPress={function (): void {
-          throw new Error('Function not implemented.');
-        }}>
-        </CustomButton>
+        <CustomInput
+          value={password}
+          type="password"
+          placeholder="Contraseña"
+          onChange={setPassword}
+        />
+
+        <CustomButton title="Iniciar sesión" onPress={handleLogin} />
+
+        <CustomButton
+          title="Registrarme"
+          variant="secondary"
+          onPress={() => navigation.navigate("Register")}
+        />
       </View>
     </View>
   );
@@ -45,31 +49,28 @@ export default function LoginScreen({navigation} : any) {
 
 const styles = StyleSheet.create({
   container: {
-    //habilita uso de flexbox para distribucion de espacio
     flex: 1,
-    //distribucion en eje horizontal
-    alignItems: 'center',
-    //alineacion en eje vertical
-    justifyContent: 'center',
+    alignItems: "center", 
+    justifyContent: "center",
     padding: 20,
   },
   card: {
-   backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderRadius: 15,
     padding: 30,
-    width: '85%',
-    shadowColor: '#000',
+    width: "85%",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 6,
-    justifyContent: 'space-between'
+    justifyContent: "space-between",
   },
   title: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 28,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 20,
-    color: '#393434ff',
-  }
+    color: "#393434ff",
+  },
 });
