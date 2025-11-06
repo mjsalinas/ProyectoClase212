@@ -1,75 +1,76 @@
-import { useState } from "react";
-import { View, Text,StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import { useState } from "react";
 
-export default function LoginScreen({navigation} : any) {
-  const [email, setEmail] = useState('');
+export default function Registro({ navigation }: any) {
+  const [usuario, setUsuario] = useState({
+    nombreCompleto: "",
+    correo: "",
+    contrasena: "",
+    confirmarContrasena: "",
+    telefono: "",
+    fechaNacimiento: "",
+  });
 
-  const handleLogin = () => {
-    try {
-        navigation.navigate('Tabs');
-    } catch (error) {
-        console.log(error);
-    }
-  }
+  const handleRegister = () => {
+    console.log("Datos del usuario:", usuario);
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        <Text style={styles.title}> Sign In</Text>
-        <CustomInput
-          value={email}
-          type='email'
-          placeholder={'Correo'}
-          onChange={setEmail}
-        />
-        <CustomInput
-          value={'123456'}
-          type='password'
-          placeholder={'Correo'}
-          onChange={()=>{}}
-        />
-        <CustomButton title={'Iniciar Sesion'} 
-        onPress={handleLogin}>
+    <ScrollView contentContainerStyle={styles.container}>
+      <CustomInput
+        value={usuario.nombreCompleto}
+        placeholder="Nombre completo"
+        onChange={(text) => setUsuario({ ...usuario, nombreCompleto: text })}
+        required
+      />
 
-            
-        </CustomButton>
-        <CustomButton title={'Registrarme'} variant='secondary' onPress={function (): void {
-          throw new Error('Function not implemented.');
-        }}>
-        </CustomButton>
-      </View>
-    </View>
+      <CustomInput
+        value={usuario.correo}
+        placeholder="Correo electrónico"
+        onChange={(text) => setUsuario({ ...usuario, correo: text })}
+        type="email"
+        required
+      />
+
+      <CustomInput
+        value={usuario.contrasena}
+        placeholder="Contraseña"
+        onChange={(text) => setUsuario({ ...usuario, contrasena: text })}
+        type="password"
+        required
+      />
+
+      <CustomInput
+        value={usuario.confirmarContrasena}
+        placeholder="Confirmar contraseña"
+        onChange={(text) => setUsuario({ ...usuario, confirmarContrasena: text })}
+        type="password"
+        required
+      />
+
+      <CustomInput
+        value={usuario.telefono}
+        placeholder="Teléfono"
+        onChange={(text) => setUsuario({ ...usuario, telefono: text })}
+        type="number"
+      />
+
+      <CustomInput
+        value={usuario.fechaNacimiento}
+        placeholder="Fecha de nacimiento (YYYY-MM-DD)"
+        onChange={(text) => setUsuario({ ...usuario, fechaNacimiento: text })}
+      />
+
+      <CustomButton title="Registrarme" onPress={handleRegister} />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    //habilita uso de flexbox para distribucion de espacio
-    flex: 1,
-    //distribucion en eje horizontal
-    alignItems: 'center',
-    //alineacion en eje vertical
-    justifyContent: 'center',
     padding: 20,
+    backgroundColor: "#fff",
   },
-  card: {
-   backgroundColor: '#FFFFFF',
-    borderRadius: 15,
-    padding: 30,
-    width: '85%',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 6,
-    justifyContent: 'space-between'
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    textAlign: 'center',
-    marginBottom: 20,
-    color: '#393434ff',
-  }
 });
