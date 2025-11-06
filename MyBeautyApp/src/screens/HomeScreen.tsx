@@ -13,11 +13,18 @@ useEffect(()=>{
 
 const handleRegisterService = () =>{
 navigation.navigate('ServiceRegistry');
+
+}
+
+const handleForm = () =>{
+    navigation.navigate('RegistroUsuario');
 }
     return(
         <View>
             <CustomButton title="Agrega un Servicio"
                 onPress={handleRegisterService}/>
+            <CustomButton title="Ir al Formulario de Registro"
+                onPress={handleForm}/>
         </View>
     )
 }
