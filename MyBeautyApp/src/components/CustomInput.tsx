@@ -26,7 +26,7 @@ export default function CustomInput ({type = "text", required, value, placeholde
         //output: string
     const getError = () => {
         if (type === 'email' && !value.includes('@')) return 'Correo invalido';
-        if (type === 'password' && value.length < 6) return 'La contraseña debe ser mas fuerte';
+        if (type === 'password' && value.length < 6) return 'La contraseña debe tener al menos 6 caracteres';
         // validar campos obligatorios
     }
     const error = getError();    
