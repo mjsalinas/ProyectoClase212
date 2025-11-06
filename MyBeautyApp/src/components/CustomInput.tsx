@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 type Props = {
-    required? : boolean;
+    required? : boole;
     type?: 'text' | 'email' | 'password' | 'number';
     value: string;
     placeholder : string;
