@@ -1,31 +1,51 @@
-import { View, Text } from "react-native";
+import React from "react";
+import { SafeAreaView, View, Text, StyleSheet } from "react-native";
 import CustomButton from "../components/CustomButton";
 import { navigationRef } from "../navigation/NavigationService";
 
-export default function ProfileScreen({navigation}: any){
-
-const handleLogout = () =>{
-    if (navigationRef.isReady()){
-        navigationRef.reset({
-            //indice del arreglo, que indica la vista actual al momento de reiniciar el stack de navegacion
-            index: 0,
-            //es un array de objetos, cada uno de estos representa cada ruta que conformara el nuevo stack de navegacion 
-            routes: [{name: 'Login'}],
-        })
+export default function ProfileScreen() {
+  const handleLogout = () => {
+    if (navigationRef.isReady()) {
+      navigationRef.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
     }
-}
-    return(
-    <View>
-        {/* implementacion correcta de redefinicion de navegacion desde un componente externo  */}
-        <Text>Pantalla de Perfil</Text>
-        <CustomButton title="Cerrar Sesion"
-        onPress={handleLogout}/>
+  };
 
-        {/* //intento fallido de redefinicion de stack de navegacion  */}
-     <CustomButton title="Ir a login"
-        onPress={()=>{
-            navigation.navigate('Login');
-        }}/>
+  const goToLogin = () => {
+    if (navigationRef.isReady()) {
+      navigationRef.navigate("Login");
+    }
+  };
 
-    </View>)
+  return (
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Pantalla de Perfil</Text>
+
+        <CustomButton title="Cerrar Sesión" onPress={handleLogout} variant="primary" />
+
+        <CustomButton title="Ir a Login" onPress={goToLogin} variant="tertiary" />
+      </View>
+    </SafeAreaView>
+  );
 }
+
+const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: "#F5F6FA",
+  },
+  container: {
+    flex: 1,
+    padding: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "700",
+    marginBottom: 20,
+  },
+});
