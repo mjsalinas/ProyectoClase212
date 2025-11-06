@@ -4,7 +4,7 @@ import { useState } from "react";
 
 type Props = {
     required? : boolean;
-    type?: 'text' | 'email' | 'password' | 'number';
+    type?: 'text' | 'email' | 'password' | 'number' | 'date';
     value: string;
     placeholder : string;
     onChange: (text: string) => void;
@@ -24,9 +24,13 @@ export default function CustomInput ({type = "text", required, value, placeholde
 
         //funcion para calcular errores de validacion
         //output: string
+
+    const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{2}$/;
     const getError = () => {
         if (type === 'email' && !value.includes('@')) return 'Correo invalido';
         if (type === 'password' && value.length < 6) return 'La contraseña debe ser mas fuerte';
+        if (type === 'number' && !(/^[0-9]*$/).test(value)) return 'Ingrese solo numeros';
+        if(type == 'date' && !(dateRegex).test(value)) return 'Ingrese formato dd/mm/yy' ;
         // validar campos obligatorios
     }
     const error = getError();    
