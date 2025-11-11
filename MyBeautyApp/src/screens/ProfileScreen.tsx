@@ -1,11 +1,13 @@
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import CustomButton from "../components/CustomButton";
 import { navigationRef } from "../navigation/NavigationService";
 import { useAuth } from "../contexts/AuthContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
 export default function ProfileScreen({ navigation }: any) {
 
     const { logout, user } = useAuth();
+    const {changeLanguage, language} = useLanguage();
 
     const handleLogout = () => {
         if (navigationRef.isReady()) {
@@ -32,5 +34,11 @@ export default function ProfileScreen({ navigation }: any) {
                     navigation.navigate('Login');
                 }} />
 
+            <Text>Bienvenido a Settings</Text> 
+               <Text>Tu idioma de traduccion actual: {language}</Text>
+               <Button title="EN" onPress={()=> changeLanguage("en")}/>
+               <Button title="ES" onPress={()=> changeLanguage("es")}/>
+               <Button title="FR" onPress={()=> changeLanguage("fr")}/>
+               <Button title="DE" onPress={()=> changeLanguage("de")}/>
         </View>)
 }

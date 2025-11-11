@@ -7,20 +7,17 @@ import { useAuth } from "../contexts/AuthContext";
 export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
 
-  const { login, isAllowed } = useAuth();
+  const { login } = useAuth();
 
   const handleLogin = () => {
     try {
       const allowed = login(email);
       
       if (allowed) {
-        console.log("allowed en login if:" + allowed)
         navigation.navigate('Tabs');
       }
-        console.log("allowed en login:" + allowed)
 
     } catch (error) {
-      console.log(error);
     }
   }
   return (
