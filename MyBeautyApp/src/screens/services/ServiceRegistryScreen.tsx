@@ -22,10 +22,8 @@ export default function ServiceRegistryScreen({navigation}: any){
                 placeholder="ingresa el servicio..." 
                 onChange={setItem}
             />
-            <CustomButton 
-                title="Guardar"
-                onPress={handleOnSave}
-            />
+             
+            
         </View>
     );
 }
