@@ -1,16 +1,26 @@
 import { useState } from "react";
-import { View, Text,StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import { useAuth } from "../contexts/AuthContext";
 
-export default function LoginScreen({navigation} : any) {
+export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
+
+  const { login, isAllowed } = useAuth();
 
   const handleLogin = () => {
     try {
+      const allowed = login(email);
+      
+      if (allowed) {
+        console.log("allowed en login if:" + allowed)
         navigation.navigate('Tabs');
+      }
+        console.log("allowed en login:" + allowed)
+
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
   return (
@@ -27,12 +37,12 @@ export default function LoginScreen({navigation} : any) {
           value={'123456'}
           type='password'
           placeholder={'Correo'}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
-        <CustomButton title={'Iniciar Sesion'} 
-        onPress={handleLogin}>
+        <CustomButton title={'Iniciar Sesion'}
+          onPress={handleLogin}>
 
-            
+
         </CustomButton>
         <CustomButton title={'Registrarme'} variant='secondary' onPress={function (): void {
           throw new Error('Function not implemented.');
@@ -54,7 +64,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   card: {
-   backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFFFFF',
     borderRadius: 15,
     padding: 30,
     width: '85%',
