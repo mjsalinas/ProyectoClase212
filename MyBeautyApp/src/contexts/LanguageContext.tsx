@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { I18n } from "i18n-js";
 import { createContext, useContext, useEffect, useState } from "react";
+import { transltns } from "../utils/translations";
 
 type Language = 'es'| 'en' | 'fr' | 'de';
 
@@ -10,14 +11,14 @@ type LanguageContextProps = {
 }
 // tarea: implementar diccionario desde archivo en utils
 //1. definir diccionario
-const translations = { 
-en: {signIn: 'Sign In', welcome: 'Welcome'},
-es: {signIn: 'Iniciar Sesion', welcome: 'Bienvenido'},
-fr: {signIn: 'Connexion', welcome: 'Bienvenue'},
-de: {signIn: 'Anmelden', welcome: 'Wilkommen'},
-}
-//2. crear instancia de i18n con diccionario cargado
-const i18n = new I18n(translations);
+// const translations = { 
+// en: {signIn: 'Sign In', welcome: 'Welcome'},
+// es: {signIn: 'Iniciar Sesion', welcome: 'Bienvenido'},
+// fr: {signIn: 'Connexion', welcome: 'Bienvenue'},
+// de: {signIn: 'Anmelden', welcome: 'Wilkommen'},
+// }
+//2. crear instancia de i18n con diccionario cargado desde utils para no definirlo en el contexto
+const i18n = new I18n(transltns);
 
 //3. definir idioma por defecto 
 i18n.defaultLocale = "de";
@@ -59,3 +60,5 @@ export const LanguageProvider = ({children}: {children: React.ReactNode}) => {
         </LanguageContext.Provider>
     );
 }
+
+export {i18n}

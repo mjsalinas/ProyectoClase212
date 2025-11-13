@@ -34,8 +34,8 @@ export default function ProfileScreen({ navigation }: any) {
                     navigation.navigate('Login');
                 }} />
 
-            <Text>Bienvenido a Settings</Text> 
-               <Text>Tu idioma de traduccion actual: {language}</Text>
+            <Text >Bienvenido a Settings</Text> 
+               <Text style={{fontSize:18}}>Tu idioma de traduccion actual: {language}</Text>
                <Button title="EN" onPress={()=> changeLanguage("en")}/>
                <Button title="ES" onPress={()=> changeLanguage("es")}/>
                <Button title="FR" onPress={()=> changeLanguage("fr")}/>

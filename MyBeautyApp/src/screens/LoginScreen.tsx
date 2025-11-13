@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Alert } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import { useAuth } from "../contexts/AuthContext";
+import { i18n } from "../contexts/LanguageContext";
 
 export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
@@ -20,10 +21,14 @@ export default function LoginScreen({ navigation }: any) {
     } catch (error) {
     }
   }
+
+  const handleNavigateToRegister = () => {
+    navigation.navigate('Tabs');
+  };
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}> Sign In</Text>
+        <Text style={styles.title}> {i18n.t('signIn')} </Text>
         <CustomInput
           value={email}
           type='email'
@@ -36,14 +41,12 @@ export default function LoginScreen({ navigation }: any) {
           placeholder={'Correo'}
           onChange={() => { }}
         />
-        <CustomButton title={'Iniciar Sesion'}
+        <CustomButton title={i18n.t('signIn')}
           onPress={handleLogin}>
 
 
         </CustomButton>
-        <CustomButton title={'Registrarme'} variant='secondary' onPress={function (): void {
-          throw new Error('Function not implemented.');
-        }}>
+        <CustomButton title={i18n.t('signUp')} variant='secondary' onPress={handleNavigateToRegister}>
         </CustomButton>
       </View>
     </View>
