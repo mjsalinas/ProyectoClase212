@@ -2,9 +2,13 @@ import { useState } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import { useAuth } from "../contexts/AuthContext";
+import { i18n } from "../contexts/LanguageContext";
 
 export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
+
+  const { login } = useAuth();
 
   const handleLogin = () => {
     try {
@@ -23,7 +27,7 @@ export default function LoginScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}> Sign In</Text>
+        <Text style={styles.title}> {i18n.t('signIn')} </Text>
         <CustomInput
           value={email}
           type='email'
@@ -36,12 +40,12 @@ export default function LoginScreen({ navigation }: any) {
           placeholder={'Correo'}
           onChange={() => { }}
         />
-        <CustomButton title={'Iniciar Sesion'}
+        <CustomButton title={i18n.t('signIn')}
           onPress={handleLogin}>
 
 
         </CustomButton>
-        <CustomButton title={'Registrarme'} variant='secondary' onPress={handleGoToRegister}>
+        <CustomButton title={i18n.t('signUp')} variant='secondary' onPress={() =>{}}>
         </CustomButton>
       </View>
     </View>
