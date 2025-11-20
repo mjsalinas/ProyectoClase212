@@ -21,7 +21,7 @@ type LanguageContextProps = {
 const i18n = new I18n(transltns);
 
 //3. definir idioma por defecto 
-i18n.defaultLocale = "de";
+i18n.defaultLocale = "en";
 i18n.enableFallback = true;
 
 const LanguageContext = createContext<LanguageContextProps | null>(null);

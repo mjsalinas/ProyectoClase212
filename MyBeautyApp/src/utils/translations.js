@@ -1,22 +1,22 @@
 export const transltns = {
-en: {
-    signIn: 'Sign In', 
+ en: {
     welcome: 'Welcome',
-    signUp: 'Register'
-},
-es: {
-    signIn: 'Iniciar Sesion', 
+    email: 'Email',
+    login: 'Login',
+    book: 'Book Appointment',
+    settings: 'Settings',
+    profile: 'Profile',
+    language: 'Language',
+    theme: 'Theme',
+  },
+  es: {
     welcome: 'Bienvenido',
-    signUp: 'Registrarme'
-},
-fr: {
-    signIn: 'Connexion', 
-    welcome: 'Bienvenue',
-    signUp: 'Registrer'
-},
-de: {
-    signIn: 'Anmelden', 
-    welcome: 'Wilkommen',
-    signUp: "Registrieren"
-},
+    email: 'Correo',
+    login: 'Ingresar',
+    book: 'Reservar Cita',
+    settings: 'Configuración',
+    profile: 'Perfil',
+    language: 'Idioma',
+    theme: 'Tema',
+  },
 };
