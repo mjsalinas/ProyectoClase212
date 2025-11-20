@@ -7,12 +7,14 @@ import { i18n } from "../contexts/LanguageContext";
 import { useTheme } from "../contexts/ThemeContext";
 import { getThemeColors } from "../utils/theme";
 import CustomButton from "../components/CustomButton";
+import { useAppSelector } from "../store/hooks";
 
 const HomeScreen = () => {
   const { user } = useAuth();
   const navigation = useNavigation<any>();
   const { theme } = useTheme();
   const colors = getThemeColors(theme);
+  const client = useAppSelector((state)=>state.client);
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -30,14 +32,9 @@ const HomeScreen = () => {
 
       {/* Card principal */}
       <View style={[styles.card, { backgroundColor: colors.card }]}>
-        <Text style={[styles.cardTitle, { color: colors.text }]}>
-          Gestiona tus citas de belleza
-        </Text>
-        <Text style={[styles.cardText, { color: colors.textSecondary }]}>
-          Desde aquí podrá consultar la información del cliente, actualizar
-          sus preferencias y acceder a la configuración de la aplicación.
-          Más adelante, este panel se integrará con Google Calendar para
-          ver y sincronizar las citas del salón.
+       <Text style={[styles.cardTitle, {color: colors.text}]}>
+        {client.name ? 'Cliente actual: '+ client.name 
+        : "No hay perfil de cliente cargado"}
         </Text>
 
         <CustomButton
