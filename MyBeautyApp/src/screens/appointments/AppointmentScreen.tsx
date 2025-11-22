@@ -4,6 +4,7 @@ import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
 
+<<<<<<< HEAD:MyBeautyApp/src/screens/services/ServiceRegistryScreen.tsx
 export default function ServiceRegistryScreen({ navigation }: any) {
     const [nombreCompleto, setNombreCompleto] = useState('');
     const [correoElectronico, setCorreoElectronico] = useState('');
@@ -11,6 +12,10 @@ export default function ServiceRegistryScreen({ navigation }: any) {
     const [confirmarContrasena, setConfirmarContrasena] = useState('');
     const [telefono, setTelefono] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
+=======
+export default function AppointmentScreen({navigation}: any){
+    const [item, setItem] = useState('');
+>>>>>>> 0501b903c497bb70ba61327aca8617f322f36b07:MyBeautyApp/src/screens/appointments/AppointmentScreen.tsx
 
     const handleRegister = () => {
         console.log("Registrando usuario...");

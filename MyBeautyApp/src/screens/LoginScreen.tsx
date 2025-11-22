@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
-import CustomInput from "../components/CustomInput";
-import CustomButton from "../components/CustomButton";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../contexts/AuthContext";
 import { i18n } from "../contexts/LanguageContext";
 
-export default function LoginScreen({ navigation }: any) {
-  const [email, setEmail] = useState('');
-
+const LoginScreen = () => {
+  const [email, setEmail] = useState("");
   const { login } = useAuth();
+  const navigation = useNavigation<any>();
 
   const handleLogin = () => {
+<<<<<<< HEAD
     try {
       navigation.navigate('Tabs');
     } catch (error) {
@@ -48,37 +48,41 @@ export default function LoginScreen({ navigation }: any) {
         <CustomButton title={i18n.t('signUp')} variant='secondary' onPress={() =>{}}>
         </CustomButton>
       </View>
+=======
+    if (email.endsWith(".edu")) {
+      login(email);
+      navigation.navigate("Home");
+    } else {
+      alert("Solo se permite acceso a correos .edu");
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>{i18n.t("email")}</Text>
+      <TextInput
+        value={email}
+        onChangeText={setEmail}
+        style={styles.input}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <Button title={i18n.t("login")} onPress={handleLogin} color="#FFD3E0" />
+>>>>>>> 0501b903c497bb70ba61327aca8617f322f36b07
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    //habilita uso de flexbox para distribucion de espacio
-    flex: 1,
-    //distribucion en eje horizontal
-    alignItems: 'center',
-    //alineacion en eje vertical
-    justifyContent: 'center',
-    padding: 20,
-  },
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 15,
-    padding: 30,
-    width: '85%',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 6,
-    justifyContent: 'space-between'
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    textAlign: 'center',
+  container: { flex: 1, justifyContent: "center", padding: 20 },
+  label: { fontSize: 18, marginBottom: 10 },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
     marginBottom: 20,
-    color: '#393434ff',
-  }
+    padding: 10,
+    borderRadius: 6,
+  },
 });
+
+export default LoginScreen;
