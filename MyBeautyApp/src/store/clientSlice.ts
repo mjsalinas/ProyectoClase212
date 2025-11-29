@@ -11,7 +11,7 @@ const initialState: ClientProfile = {
     name: "",
     phone: "",
     favoriteService: "",
-    notes: ""
+    notes: "",
 };
 
 const clientSlice = createSlice({
@@ -28,5 +28,5 @@ const clientSlice = createSlice({
     },
 });
 
-export const {setClientProfile, clearClientProfile} = clientSlice.actions;
+export const { setClientProfile, clearClientProfile } = clientSlice.actions;
 export default clientSlice.reducer;
