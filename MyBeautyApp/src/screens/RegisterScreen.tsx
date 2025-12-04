@@ -8,10 +8,13 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function RegisterScreen({ navigation }: any) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const {register} = useAuth();
 
   const handleRegister = async () => {
     if (!email || !password) {
@@ -20,14 +23,8 @@ export default function RegisterScreen({ navigation }: any) {
     }
 
     try {
-//implementar registro de cuentas
-
-      Alert.alert(
-        "Registro exitoso",
-        "Si tu proyecto requiere verificación, revisa tu correo."
-      );
-
-      navigation.replace("LoginScreen");
+      await register(email, password);
+      navigation.replace("Login");
     } catch (error: any) {
       Alert.alert(
         "Error de registro",

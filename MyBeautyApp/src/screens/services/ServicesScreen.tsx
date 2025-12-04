@@ -9,6 +9,8 @@ import {
   FlatList,
   Alert,
 } from "react-native";
+import { supabase } from "../../services/supabaseClient";
+import { errorMessageValidation } from "../../utils/validations/apiResponseErrorValidation";
 
 type Service = {
   id: string;
@@ -34,12 +36,27 @@ export default function ServicesScreen() {
 
   // Cargar servicios al montar la pantalla
   useEffect(() => {
-    
+    loadServices();
   }, []);
 
-  // Obtener servicios desde Supabase
   const loadServices = async () => {
-  
+    setLoading(true);
+    try {
+  // Obtener servicios desde Supabase
+      const {data, error} = await supabase
+        .from("services")
+        .select("*")
+        .order("created_at", {ascending: false});
+// validar errores
+      if (error){ 
+        errorMessageValidation(error, "Error al cargar servicios: ") 
+        return 
+      }
+//asignar respuesta de base de datos al estado de la pantalla
+        setServices(data as Service[])
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSaveService = async () => {
@@ -62,25 +79,49 @@ export default function ServicesScreen() {
       return;
     }
 
-    const newService: Service = {
-      id: Date.now().toString(), // ID local sencillo
-      name,
-      description: description || null,
-      duration: durationNumber,
-      price: priceNumber,
-      category: category || null,
-      is_active: true,
-    };
-
     // Agregar el nuevo servicio al arreglo local
-    setServices((prev) => [newService, ...prev]);
 
+    // const newService: Service = {
+    //   id: Date.now().toString(), // ID local sencillo
+    //   name,
+    //   description: description || null,
+    //   duration: durationNumber,
+    //   price: priceNumber,
+    //   category: category || null,
+    //   is_active: true,
+    // };
+    // setServices((prev) => [newService, ...prev]);
+
+    //Guardar en base de datos
+    setLoading(true);
+    try{
+      const {error} = await supabase.from("services").insert({
+        name, 
+        description: description,
+        duration: duration, 
+        price,
+        category,
+      });
+      // validar errores
+      if (error){ 
+        errorMessageValidation(error, "Error al crear servicio: ") 
+        return 
+      }
     // Limpiar formulario
     setName("");
     setDescription("");
     setDuration("");
     setPrice("");
     setCategory("");
+
+    //recargar lista de servicios
+    loadServices();
+
+    }finally{
+      setLoading(false);
+    }
+
+
   };
 
   // Render de cada card de servicio
