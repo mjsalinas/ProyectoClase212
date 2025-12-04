@@ -44,7 +44,13 @@ const HomeScreen = () => {
           }
           variant="primary"
         />
-
+ <CustomButton
+          title="Registar Servicio"
+          onPress={() =>
+            navigation.navigate("Tabs", { screen: "Services" })
+          }
+          variant="primary"
+        />
         <CustomButton
           title="Ir a configuración"
           onPress={() =>
