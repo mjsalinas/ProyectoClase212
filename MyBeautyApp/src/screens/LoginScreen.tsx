@@ -6,12 +6,13 @@ import { i18n } from "../contexts/LanguageContext";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigation = useNavigation<any>();
 
   const handleLogin = () => {
     if (email.endsWith(".edu")) {
-      login(email);
+      login(email, password);
       navigation.navigate("Home");
     } else {
       alert("Solo se permite acceso a correos .edu");
@@ -26,6 +27,13 @@ const LoginScreen = () => {
         onChangeText={setEmail}
         style={styles.input}
         keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <TextInput
+        value={password}
+        onChangeText={setPassword}
+        style={styles.input}
+        keyboardType="default"
         autoCapitalize="none"
       />
       <Button title={i18n.t("login")} onPress={handleLogin} color="#FFD3E0" />

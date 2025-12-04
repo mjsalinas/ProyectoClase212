@@ -11,7 +11,7 @@ type User = {
 type AuthContextType = {
     user: User | null;
     isAllowed: boolean;
-    login: (email:string) => Promise<void>;
+    login: (email:string, password:string) => Promise<void>;
     logout: () => void;
 }
 
