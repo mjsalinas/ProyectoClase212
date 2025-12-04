@@ -3,12 +3,18 @@ import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../contexts/AuthContext";
 import { i18n } from "../contexts/LanguageContext";
+import CustomButton from "../components/CustomButton";
+import { useTheme } from "../contexts/ThemeContext";
+import { getThemeColors } from "../utils/theme";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigation = useNavigation<any>();
+  
+  const { theme } = useTheme();
+  const colors = getThemeColors(theme);
 
   const handleLogin = () => {
     if (email.endsWith(".edu")) {
@@ -19,24 +25,29 @@ const LoginScreen = () => {
     }
   };
 
+  const handleRegister = () =>{
+      navigation.navigate("Register");
+
+  }
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{i18n.t("email")}</Text>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      <Text style={[styles.label,  { color: colors.text }]}>{i18n.t("email")}</Text>
       <TextInput
         value={email}
         onChangeText={setEmail}
-        style={styles.input}
+        style={[styles.input,  { color: colors.text }]}
         keyboardType="email-address"
         autoCapitalize="none"
       />
       <TextInput
         value={password}
         onChangeText={setPassword}
-        style={styles.input}
+        style={[styles.input,  { color: colors.text }]}
         keyboardType="default"
         autoCapitalize="none"
       />
-      <Button title={i18n.t("login")} onPress={handleLogin} color="#FFD3E0" />
+      <CustomButton title={i18n.t("login")} onPress={handleLogin}  />
+      <CustomButton title={i18n.t("register")} onPress={handleRegister} />
     </View>
   );
 };

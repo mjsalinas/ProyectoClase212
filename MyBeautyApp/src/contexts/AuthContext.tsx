@@ -6,12 +6,12 @@ type User = {
     id: string;
     email?: string;
     token: string;
-}| null;
+} | null;
 
 type AuthContextType = {
     user: User | null;
     isAllowed: boolean;
-    login: (email:string, password:string) => Promise<void>;
+    login: (email: string, password: string) => Promise<void>;
     logout: () => void;
 }
 
@@ -23,28 +23,32 @@ export const useAuth = () => {
     return context;
 }
 
-export const AuthProvider = ({children}: {children: React.ReactNode}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User>(null);
     const [isAllowed, setIsAllowed] = useState<boolean>(false);
 
-    useEffect(()=>{
-        const restoreSession = async () =>{
-            const {data, error} = await supabase.auth.getSession();
-            
+    useEffect(() => {
+        const restoreSession = async () => {
+            try { 
+                const { data, error } = await supabase.auth.getSession();
+            } catch (err) {
+
+            }
+
         }
 
-    },[])
+    }, [])
 
 
     const login = async (email: string, password: string) => {
-        const {data, error} = await supabase.auth.signInWithPassword({
-            email, 
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
             password
         });
-        if (error){
+        if (error) {
             Alert.alert("Error al iniciar sesion", error.message)
         };
-        if(data.session && data.user) {
+        if (data.session && data.user) {
             setUser({
                 id: data.user.id,
                 email: data.user.email,
@@ -59,7 +63,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     }
 
     return (
-        <AuthContext.Provider value={{user, isAllowed, login, logout}}>
+        <AuthContext.Provider value={{ user, isAllowed, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
