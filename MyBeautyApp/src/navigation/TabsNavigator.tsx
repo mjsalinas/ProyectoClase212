@@ -6,13 +6,14 @@ import { getThemeColors } from "../utils/theme";
 import { useTheme } from "../contexts/ThemeContext";
 import SettingsScreen from "../screens/SettingsScreen";
 import ServicesScreen from "../screens/services/ServicesScreen";
+import AppointmentScreen from "../screens/appointments/AppointmentScreen";
 
 export type TabsParamList = {
     Home: undefined;
     Profile: undefined;
     Settings: undefined;
     Services: undefined;
-
+  Appointments: undefined;
 }
 const Tab = createBottomTabNavigator<TabsParamList>();
 
@@ -56,6 +57,16 @@ const TabsNavigator = () => {
         component={ServicesScreen}
         options={{
           title: "Servicios",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="add" size={size} color={color} />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="Appointments"
+        component={AppointmentScreen}
+        options={{
+          title: "Agendar Cita",
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="add" size={size} color={color} />
           ),

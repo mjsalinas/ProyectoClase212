@@ -51,6 +51,13 @@ const HomeScreen = () => {
           }
           variant="primary"
         />
+         <CustomButton
+          title="Agendar Cita"
+          onPress={() =>
+            navigation.navigate("Tabs", { screen: "Appointments" })
+          }
+          variant="primary"
+        />
         <CustomButton
           title="Ir a configuración"
           onPress={() =>
