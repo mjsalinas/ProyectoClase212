@@ -5,11 +5,13 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { getThemeColors } from "../utils/theme";
 import { useTheme } from "../contexts/ThemeContext";
 import SettingsScreen from "../screens/SettingsScreen";
+import ServicesScreen from "../screens/services/ServicesScreen";
 
 export type TabsParamList = {
     Home: undefined;
     Profile: undefined;
     Settings: undefined;
+    Services: undefined;
 
 }
 const Tab = createBottomTabNavigator<TabsParamList>();
@@ -46,6 +48,16 @@ const TabsNavigator = () => {
           title: "Configuración",
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="settings" size={size} color={color} />
+          ),
+        }}
+      />
+       <Tab.Screen
+        name="Services"
+        component={ServicesScreen}
+        options={{
+          title: "Servicios",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="add" size={size} color={color} />
           ),
         }}
       />
